@@ -1,0 +1,9 @@
+---
+- name: Destroy masters playbooks 
+  hosts: localhost
+  become: true  
+  vars_files:
+    - ../vars/machines.yaml 
+  tasks: 
+    - name: Destroy master machines
+      import_tasks: ./tasks/destroy-masters-instances.yaml

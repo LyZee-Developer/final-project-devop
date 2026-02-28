@@ -1,0 +1,13 @@
+
+create-masters: 
+    ansible-playbook -i inventory.ini playbooks/create-master-playbook.yaml
+create-workers: 
+    ansible-playbook -i inventory.ini playbooks/create-worker-playbook.yaml
+destroy-workers :
+    ansible-playbook -i inventory.ini playbooks/destroy-worker-playbook.yaml
+destroy-masters: 
+    ansible-playbook -i inventory.ini playbooks/destroy-master-playbook.yaml
+create-vm: 
+    ansible-playbook -i inventory.ini playbooks/create-gcp-vm.yaml 
+destroy-vm: 
+    ansible-playbook -i inventory.ini playbooks/remove-gcp-vm.yaml

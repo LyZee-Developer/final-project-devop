@@ -1,0 +1,8 @@
+---
+- name: Destroy workers playbooks 
+  hosts: localhost 
+  vars_files:
+    - ../vars/machines.yaml 
+  tasks: 
+    - name: Destroy workers machines
+      import_tasks: ./tasks/destroy-workers-instances.yaml
