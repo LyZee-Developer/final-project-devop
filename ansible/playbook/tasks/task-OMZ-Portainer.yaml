@@ -1,0 +1,31 @@
+- name: Install Zsh and Git packages
+  ansible.builtin.package:
+    name:
+      - zsh
+      - git
+    state: present
+
+- name: Set user shell to zsh
+  ansible.builtin.user:
+    name: "{{ target_user }}"
+    shell: /bin/zsh
+
+- name: Download Oh My Zsh installation script
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: "/home/{{ target_user }}/install.sh"
+    mode: '0755' # Make the script executable
+
+- name: Run Oh My Zsh installation script
+  ansible.builtin.command:
+    cmd: sh /home/{{ target_user }}/install.sh
+  args:
+    creates: "/home/{{ target_user }}/.oh-my-zsh" # Idempotency check
+
+- name: Update .zshrc theme (optional example)
+  ansible.builtin.replace:
+    path: "/home/{{ target_user }}/.zshrc"
+    regexp: 'ZSH_THEME="robbyrussell"'
+    replace: 'ZSH_THEME="essembeh"' # Change to your preferred theme
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"

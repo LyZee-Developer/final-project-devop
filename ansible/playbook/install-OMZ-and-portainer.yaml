@@ -1,0 +1,11 @@
+---
+- name: Install OMZ and Portainer
+  hosts: all
+  become: true
+
+  tasks: 
+  - name: nstall OMZ
+    import_tasks: ./tasks/task-OMZ-Portainer.yaml
+
+  - name: Install Portainer
+    import_tasks: ./tasks/task-Portainer.yaml
