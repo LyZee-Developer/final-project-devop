@@ -1,0 +1,4 @@
+  - name: Install glab
+    apt:
+      name: glab
+      state: latest

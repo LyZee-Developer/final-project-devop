@@ -1,0 +1,14 @@
+- name: Add Docker repository
+  ansible.builtin.deb822_repository:
+    name: docker
+    uris: https://download.docker.com/linux/ubuntu
+    components: [stable]
+    architectures: [amd64]
+    signed_by: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+    
+- name: Install Docker Packages
+  ansible.builtin.apt:
+    name: [docker-ce, docker-ce-cli, containerd.io, docker-compose-plugin]
+    state: present
+    update_cache: yes

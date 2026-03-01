@@ -1,3 +1,5 @@
 
 install-omz-pt :
     ansible-playbook -i inventory.ini playbook/install-OMZ-and-portainer.yaml
+install-software-marchine-server1:
+    
