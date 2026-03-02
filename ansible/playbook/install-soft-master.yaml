@@ -4,8 +4,23 @@
   become: true
 
   tasks: 
-  - name: nstall OMZ
-    import_tasks: ./tasks/task-OMZ-Portainer.yaml
+    - name: Update Catch
+      import_tasks: ./tasks/updare-cach.yaml
 
-  - name: Install Portainer
-    import_tasks: ./tasks/task-Portainer.yaml
+    - name: Install Portainer
+      import_tasks: ./tasks/task-Portainer.yaml
+
+    - name: Install OMZ 
+      import_tasks: ./tasks/task-OMZ-Portainer.yaml
+
+    - name: Install Docker and docker compose
+      import_tasks: ./tasks/task-docker-n-compoes.yaml
+      when: inventory_hostname == "master-server01"
+      
+    - name: Install Ansible
+      import_tasks: ./tasks/task-ansible.yaml
+      when: inventory_hostname == "master-server01"
+
+    - name: Install Nginx and certbot
+      import_tasks: ./tasks/task-nginx-certbot.yaml
+      when: inventory_hostname == "master-server01"
