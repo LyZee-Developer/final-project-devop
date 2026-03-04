@@ -1,31 +1,32 @@
-- name: Install Zsh and Git packages
+
+- name: Install Zsh and Git
   ansible.builtin.package:
     name:
       - zsh
       - git
     state: present
-
+- debug:
+    msg: "Current SSH user is {{ ansible_user }}"
 - name: Set user shell to zsh
   ansible.builtin.user:
     name: "{{ target_user }}"
     shell: /bin/zsh
 
-- name: Download Oh My Zsh installation script
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-    dest: "/home/{{ target_user }}/install.sh"
-    mode: '0755' # Make the script executable
+- name: Check if Oh My Zsh already exists
+  ansible.builtin.stat:
+    path: "/home/{{ target_user }}/.oh-my-zsh"
+  register: omz_check
 
-- name: Run Oh My Zsh installation script
-  ansible.builtin.command:
-    cmd: sh /home/{{ target_user }}/install.sh
+- name: Install Oh My Zsh (non-interactive)
+  ansible.builtin.shell: |
+    RUNZSH=no CHSH=no sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   args:
-    creates: "/home/{{ target_user }}/.oh-my-zsh" # Idempotency check
+    creates: "/home/{{ target_user }}/.oh-my-zsh"
+  become: false
+  when: not omz_check.stat.exists
 
-- name: Update .zshrc theme (optional example)
+- name: Change Zsh theme
   ansible.builtin.replace:
     path: "/home/{{ target_user }}/.zshrc"
-    regexp: 'ZSH_THEME="robbyrussell"'
-    replace: 'ZSH_THEME="essembeh"' # Change to your preferred theme
-    owner: "{{ target_user }}"
-    group: "{{ target_user }}"
+    regexp: 'ZSH_THEME=".*"'
+    replace: 'ZSH_THEME="essembeh"'

@@ -1,0 +1,25 @@
+---
+- name: Destroy Software for Master
+  hosts: masters
+  become: true
+  vars:
+    target_user: lyleangseng712
+
+  tasks: 
+    - name: UnInstall Portainer
+      import_tasks: ./tasks/destroy/task-Portainer.yaml
+
+    - name: UnInstall OMZ 
+      import_tasks: ./tasks/destroy/task-OMZ-Portainer.yaml
+
+    - name: UnInstall Docker and docker compose
+      import_tasks: ./tasks/destroy/task-docker-n-compoes.yaml
+      when: inventory_hostname == "master-server01"
+      
+    - name: UnInstall Ansible
+      import_tasks: ./tasks/destroy/task-ansible.yaml
+      when: inventory_hostname == "master-server01"
+
+    - name: UnInstall Nginx and certbot
+      import_tasks: ./tasks/destroy/task-nginx-certbot.yaml
+      when: inventory_hostname == "master-server01"

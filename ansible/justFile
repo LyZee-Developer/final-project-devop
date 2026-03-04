@@ -1,5 +1,13 @@
 
 install-omz-pt :
     ansible-playbook -i inventory.ini playbook/install-OMZ-and-portainer.yaml
-install-software-marchine-server1:
+    
+install-software-master-server:
+    ansible-playbook -i inventory.ini playbook/install-soft-master.yaml
+ 
+uninstall-software-master-server:
+    ansible-playbook -i inventory.ini playbook/uninstall-soft-master.yaml
+
+install-software-worker-server:
+    ansible-playbook -i inventory.ini playbook/install-soft-master.yaml
     

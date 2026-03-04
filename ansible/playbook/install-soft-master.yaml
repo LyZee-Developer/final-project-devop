@@ -2,6 +2,8 @@
 - name: Install Software for Master
   hosts: masters
   become: true
+  vars:
+    target_user: lyleangseng712
 
   tasks: 
     - name: Update Catch

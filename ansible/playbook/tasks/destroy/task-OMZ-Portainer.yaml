@@ -1,0 +1,7 @@
+
+- name: Install Zsh and Git
+  ansible.builtin.package:
+    name:
+      - zsh
+      - git
+    state: absent

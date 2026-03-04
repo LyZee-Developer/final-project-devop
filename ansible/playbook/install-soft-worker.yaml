@@ -2,7 +2,7 @@
 - name: Install Software for Worker
   hosts: workers
   become: true
-
+  
   tasks: 
     - name: Update Catch
       import_tasks: ./tasks/updare-cach.yaml
@@ -10,11 +10,5 @@
     - name: Install Portainer
       import_tasks: ./tasks/task-Portainer.yaml
 
-    - name: Install Portainer
-      import_tasks: ./tasks/task-Portainer.yaml
-
-    - name: Install Portainer
-      import_tasks: ./tasks/task-Portainer.yaml
-      
-    - name: Install Portainer
-      import_tasks: ./tasks/task-Portainer.yaml
+    - name: Install OMZ 
+      import_tasks: ./tasks/task-OMZ-Portainer.yaml
