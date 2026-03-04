@@ -1,3 +1,14 @@
-- name: Update catch
-  apt:
-    update_cache: true
+
+- name: Create portainer container
+  community.docker.docker_container:
+    name: portainer
+    image: portainer/portainer-ce:latest
+    state: started
+    recreate: yes
+    restart_policy: always
+    published_ports:
+      - "8000:8000"
+      - "9000:9000" # Exposes the web interface on port 9000
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "portainer_data:/data" # Mounts a named volume for persistent data

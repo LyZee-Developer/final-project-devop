@@ -9,20 +9,21 @@
     - name: Update Catch
       import_tasks: ./tasks/updare-cach.yaml
 
-    - name: Install Portainer
-      import_tasks: ./tasks/task-Portainer.yaml
-
     - name: Install OMZ 
       import_tasks: ./tasks/task-OMZ-Portainer.yaml
 
     - name: Install Docker and docker compose
       import_tasks: ./tasks/task-docker-n-compoes.yaml
-      when: inventory_hostname == "master-server01"
+      when: inventory_hostname in ["master-server01", "master-server02"]
+
+    - name: Run Portainer by Docker
+      import_tasks: ./tasks/task-Portainer.yaml
+      when: inventory_hostname in ["master-server01", "master-server02"]
       
     - name: Install Ansible
       import_tasks: ./tasks/task-ansible.yaml
-      when: inventory_hostname == "master-server01"
+      when: inventory_hostname in ["master-server01", "master-server02"]
 
     - name: Install Nginx and certbot
       import_tasks: ./tasks/task-nginx-certbot.yaml
-      when: inventory_hostname == "master-server01"
+      when: inventory_hostname in ["master-server01", "master-server02"]
