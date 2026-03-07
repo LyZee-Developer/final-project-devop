@@ -1,0 +1,10 @@
+
+- name: Copy docker compose file
+  copy:
+    src: docker-compose.yaml
+    dest: /home/lyleangseng712/installation/svc/jenkins/docker-compose.yaml
+
+- name: Start Jenkins container
+  command: docker compose up -d
+  args:
+    chdir: /home/ubuntu
