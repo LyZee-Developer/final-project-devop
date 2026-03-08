@@ -2,3 +2,4 @@
   apt:
     name: ansible
     state: present
+    update_cache: yes

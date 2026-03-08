@@ -1,6 +1,6 @@
 ---
 - name: Install Software for Master
-  hosts: masters
+  hosts: all
   become: true
   vars:
     target_user: lyleangseng712
@@ -12,6 +12,14 @@
     - name: Install OMZ 
       import_tasks: ./tasks/task-OMZ-Portainer.yaml
 
+    - name: Install Ansible
+      import_tasks: ./tasks/task-ansible.yaml
+      when: inventory_hostname in ["master-server01", "master-server02"]
+
+    - name: Install Nginx and certbot
+      import_tasks: ./tasks/task-nginx-certbot.yaml
+      when: inventory_hostname in ["master-server01", "master-server02"]
+
     - name: Install Docker and docker compose
       import_tasks: ./tasks/task-docker-n-compoes.yaml
       when: inventory_hostname in ["master-server01", "master-server02"]
@@ -20,10 +28,3 @@
       import_tasks: ./tasks/task-Portainer.yaml
       when: inventory_hostname in ["master-server01", "master-server02"]
       
-    - name: Install Ansible
-      import_tasks: ./tasks/task-ansible.yaml
-      when: inventory_hostname in ["master-server01", "master-server02"]
-
-    - name: Install Nginx and certbot
-      import_tasks: ./tasks/task-nginx-certbot.yaml
-      when: inventory_hostname in ["master-server01", "master-server02"]

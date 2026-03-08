@@ -13,7 +13,7 @@
   register: ssh_pubkey
   when: true 
 
-- name: Create GCP instance
+- name: Destroy GCP instance
   google.cloud.gcp_compute_instance:
     name: "{{ item.name }}"
     machine_type: "{{ item.machine_type }}"
@@ -49,7 +49,7 @@
 
   register: gcp_workers_instances
   # when: false 
-  when: item.name not in ["worker-server03","worker-server04"] 
+  when: item.name in ["worker-server03","worker-server04"] 
 # Error in getting the first values  results 
 - name: Register the existing inventory file 
   slurp:

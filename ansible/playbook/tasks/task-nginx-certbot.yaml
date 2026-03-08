@@ -1,5 +1,5 @@
 - name: Install Nginx and Certbot plugin
-  ansible.builtin.apt:
+  apt:
     name:
       - nginx
       - certbot

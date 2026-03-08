@@ -7,4 +7,4 @@
 - name: Start Jenkins container
   command: docker compose up -d
   args:
-    chdir: /home/ubuntu
+    chdir: /home/lyleangseng712/installation/svc/jenkins
