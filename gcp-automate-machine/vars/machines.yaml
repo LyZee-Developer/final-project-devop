@@ -41,12 +41,12 @@ machines_info:
   #   disk_size: "{{ machine_specs.large.disk_size }}"
   #   disk_type: "{{ machine_specs.large.disk_type }}"
 
-  - name: "worker-server03"
-    machine_type: "{{ machine_specs.large.machine_type }}"
-    image: "{{ ubuntu_specs.v22.image }}"
-    zone: "{{ machine_specs.large.zone }}"
-    disk_size: "{{ machine_specs.large.disk_size }}"
-    disk_type: "{{ machine_specs.large.disk_type }}"
+  # - name: "worker-server03"
+  #   machine_type: "{{ machine_specs.large.machine_type }}"
+  #   image: "{{ ubuntu_specs.v22.image }}"
+  #   zone: "{{ machine_specs.large.zone }}"
+  #   disk_size: "{{ machine_specs.large.disk_size }}"
+  #   disk_type: "{{ machine_specs.large.disk_type }}"
     
   - name: "worker-server04"
     machine_type: "{{ machine_specs.large.machine_type }}"
